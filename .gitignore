@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+.eggs/
+.pytest_cache/
+.coverage
+htmlcov/
+training.log
+
+# Models and data (large files — use Git LFS or cloud storage)
+backend/data/
+backend/models/*.pt
+backend/models/*.pkl
+# Keep metrics JSON
+!backend/models/training_metrics.json
+
+# Static generated files
+backend/static/reports/
+backend/static/gradcam/
+
+# Environment
+.env
+.env.local
+.env.production
+backend/.env
+frontend/.env.local
+
+# Kaggle credentials
+kaggle.json
+~/.kaggle/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/

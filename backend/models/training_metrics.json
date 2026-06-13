@@ -1,0 +1,11 @@
+{
+  "fastvit": {
+    "model": "FastViT-T8",
+    "test_accuracy": 0.8444148936170213,
+    "test_f1_macro": 0.8486003069365899,
+    "best_val_f1": 0.875807266138582,
+    "epochs_trained": 24
+  },
+  "training_date": "2026-06-12T18:53:50.305898",
+  "duration_seconds": 6894.329638
+}

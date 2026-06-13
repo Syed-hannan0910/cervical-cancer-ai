@@ -1,0 +1,50 @@
+services:
+  # ── CervicalAI FastAPI Backend ────────────────────────────────
+  - type: web
+    name: cervicalai-backend
+    runtime: python
+    region: oregon
+    plan: free           # Upgrade to starter ($7/mo) for always-on + more RAM
+    branch: main
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
+    healthCheckPath: /api/health
+
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: PYTHONDONTWRITEBYTECODE
+        value: "1"
+      - key: MODEL_DIR
+        value: /opt/render/project/src/models
+      - key: ALLOWED_ORIGINS
+        value: https://cervicalai.vercel.app,http://localhost:5173,http://localhost:3000
+        # ↑ Replace with your actual Vercel URL after deploying frontend
+
+      # Optional: Kaggle credentials for model download on startup
+      # - key: KAGGLE_USERNAME
+      #   sync: false       # Set in Render Dashboard → Environment → Secret
+      # - key: KAGGLE_KEY
+      #   sync: false
+
+    # Persistent disk to store trained models (optional, requires paid plan)
+    # disk:
+    #   name: cervicalai-models
+    #   mountPath: /models
+    #   sizeGB: 5
+
+    autoDeploy: true
+
+  # ── Optional: Static Frontend (if not using Vercel) ──────────
+  # - type: web
+  #   name: cervicalai-frontend
+  #   runtime: static
+  #   branch: main
+  #   rootDir: frontend
+  #   buildCommand: npm ci && npm run build
+  #   staticPublishPath: dist
+  #   routes:
+  #     - type: rewrite
+  #       source: /*
+  #       destination: /index.html
